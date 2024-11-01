@@ -1,0 +1,55 @@
+﻿@model TPFinalFernandaBuffa.Models.Usuario
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Crear Nuevo Usuario</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CorreoElectronico" class="control-label"></label>
+                    <input asp-for="CorreoElectronico" class="form-control" />
+                    <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Contraseña" class="control-label"></label>
+                    <input asp-for="Contraseña" type="password" class="form-control" />
+                    <span asp-validation-for="Contraseña" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Fotografia" class="control-label">Fotografía</label>
+                    <input type="file" name="Fotografia" class="form-control-file" />
+                    <span asp-validation-for="Fotografia" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <input type="submit" value="Crear" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

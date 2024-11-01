@@ -1,0 +1,40 @@
+﻿@model TPFinalFernandaBuffa.Models.Usuario
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Eliminar Usuario</h1>
+
+    <h3 class="text-center text-danger">¿Estás seguro que deseas eliminar este usuario?</h3>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h4>Detalles del Usuario</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-3">Correo Electrónico</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CorreoElectronico)</dd>
+
+                <dt class="col-sm-3">Contraseña</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Contraseña)</dd>
+
+                <dt class="col-sm-3">Fotografía</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Fotografia)</dd>
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Eliminar" class="btn btn-danger mr-2" />
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

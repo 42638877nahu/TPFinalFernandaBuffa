@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TPFinalFernandaBuffa.Models.Destino>
+
+@{
+    ViewData["Title"] = "Destinos";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Lista de Destinos</h1> <!-- Centramos el título -->
+
+    <p class="text-end">
+        <!-- Posicionamos el botón a la derecha -->
+        <a class="btn btn-primary" asp-action="Create">Crear Nuevo Destino</a>
+    </p>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark" style="background-color: black; color: white;">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                <th>@Html.DisplayNameFor(model => model.Ubicacion)</th>
+                <th>@Html.DisplayNameFor(model => model.Fotografia)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Ubicacion)</td>
+                    <td class="text-center">
+                        <img src="@item.Fotografia" alt="Foto de @item.Nombre" class="img-fluid rounded" style="max-width: 100px; height: auto;" />
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-info text-white" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

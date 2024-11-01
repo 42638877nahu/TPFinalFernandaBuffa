@@ -1,0 +1,59 @@
+﻿@model TPFinalFernandaBuffa.Models.Destino
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center my-4">Edit Destino</h1>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <!-- Ajustamos el tamaño y centramos el formulario -->
+        <h4 class="my-3">Editar información del destino</h4>
+        <hr />
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group mb-3">
+                <!-- Añadido margen inferior a cada grupo -->
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Ubicacion" class="control-label"></label>
+                <input asp-for="Ubicacion" class="form-control" />
+                <span asp-validation-for="Ubicacion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <!-- Espacio para la imagen actual y nueva -->
+                <label asp-for="Fotografia" class="control-label">Fotografía actual</label><br />
+                <img src="@Model.Fotografia" alt="Foto de @Model.Nombre" class="img-thumbnail" width="150" height="150" /><br /><br />
+                <label for="nuevaFotografia" class="control-label">Subir nueva fotografía</label>
+                <input type="file" name="nuevaFotografia" class="form-control" />
+                <span asp-validation-for="Fotografia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <!-- Botón centrado -->
+                <input type="submit" value="Save" class="btn btn-primary mx-2" />
+                <a asp-action="Index" class="btn btn-secondary mx-2">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

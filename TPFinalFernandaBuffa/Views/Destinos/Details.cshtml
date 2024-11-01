@@ -1,0 +1,51 @@
+﻿@model TPFinalFernandaBuffa.Models.Destino
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="my-4 text-center">Details</h1> <!-- Título centrado con margen superior -->
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <!-- Centrado y ajuste de tamaño -->
+        <h4 class="my-3">Destino</h4> <!-- Subtítulo con margen -->
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                <!-- Ajuste de columnas -->
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Ubicacion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Ubicacion)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Fotografia)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Fotografia)
+            </dd>
+        </dl>
+
+        <div class="text-center mt-3">
+            <!-- Centramos los botones -->
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary mx-2">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary mx-2">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,231 @@
+﻿@model TPFinalFernandaBuffa.Models.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .bg-light-purple {
+        background-color: #E0BBE4; /* Lila claro */
+    }
+
+    .welcome-section {
+        padding: 60px 0; /* Espaciado interno para la sección de bienvenida */
+        color: #333; /* Color del texto */
+    }
+
+    .section-title {
+        color: #000000; /* Color negro para los títulos de las secciones */
+        font-weight: bold;
+    }
+
+    .card {
+        transition: transform 0.2s; /* Efecto de hover */
+    }
+
+        .card:hover {
+            transform: scale(1.05); /* Aumenta el tamaño al pasar el cursor */
+        }
+
+    .btn-custom {
+        background-color: #6A0DAD; /* Lila oscuro */
+        color: white; /* Texto blanco */
+    }
+
+        .btn-custom:hover {
+            background-color: #5a0c9d; /* Un poco más oscuro al pasar el cursor */
+        }
+
+    .bg-light-opacity {
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente para tarjetas */
+        border-radius: 8px; /* Bordes redondeados */
+    }
+</style>
+
+<div class="bg-light-purple text-center welcome-section">
+    <h1 class="display-4">Bienvenido a ItViajes</h1>
+    <p class="lead">Tu plataforma para gestionar itinerarios de manera fácil y eficiente.</p>
+</div>
+
+<div class="destinos-populares container mt-5">
+    <h2 class="section-title text-center mb-4">Destinos Populares</h2>
+    <div class="row">
+        @if (Model.Destinos != null && Model.Destinos.Any())
+
+        {
+
+            foreach (var destino in Model.Destinos)
+
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm destino-card bg-light-opacity">
+                        <img src="@destino.Fotografia" class="card-img-top" alt="Imagen de @destino.Nombre" />
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">@destino.Nombre</h5>
+                            <p class="card-text">@destino.Descripcion</p>
+                            <p class="card-text text-muted"><i class="bi bi-geo-alt-fill"></i> @destino.Ubicacion</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+
+        else
+
+        {
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    No hay destinos disponibles por el momento.
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Próximas Excursiones -->
+<div class="proximas-excursiones container mt-5">
+    <h2 class="section-title text-center mb-4">Próximas Excursiones</h2>
+    <div class="row">
+        @if (Model.Excursiones != null && Model.Excursiones.Any())
+
+        {
+
+            foreach (var excursion in Model.Excursiones)
+
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm bg-light-opacity">
+                        <img src="@excursion.Fotografia" class="card-img-top" alt="Imagen de @excursion.Nombre" />
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">@excursion.Nombre</h5>
+                            <p class="card-text">@excursion.Descripcion</p>
+                            <p class="card-text text-muted">Precio: $@excursion.Precio</p>
+                            <p class="card-text text-muted"><i class="bi bi-geo-alt-fill"></i> @excursion.Destino?.Nombre</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+
+        else
+
+        {
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    No hay excursiones disponibles por el momento.
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Formulario de búsqueda de comentarios -->
+<h2 class="section-title text-center mb-4">Buscar Comentarios</h2>
+<div class="container mt-4">
+    <form method="get" asp-action="Index" class="input-group mb-3">
+        <input type="text" name="search" value="@Model.Search" class="form-control" placeholder="Buscar comentarios o usuarios..." aria-label="Buscar">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+    </form>
+</div>
+
+<!-- Comentarios Recientes -->
+<div class="comentarios-recientes container mt-5">
+    <h2 class="section-title text-center mb-4">Comentarios Recientes</h2>
+    <div class="list-group">
+        @if (Model.Comentarios != null && Model.Comentarios.Any())
+
+        {
+
+            foreach (var comentario in Model.Comentarios)
+
+            {
+                <div class="list-group-item">
+                    <h5 class="mb-1">@comentario.Usuario.Nombre</h5>
+                    <p class="mb-1">@comentario.Texto</p>
+                    <small class="text-muted">Publicado el @comentario.Fecha.ToShortDateString()</small>
+                </div>
+            }
+
+        }
+
+        else
+
+        {
+            <div class="list-group-item">
+                <p class="text-center">No hay comentarios disponibles por el momento.</p>
+            </div>
+        }
+    </div>
+
+    <!-- Paginación de comentarios -->
+    <div class="comentarios-paginacion mt-4 text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                @if (Model.Page > 1)
+
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { search = Model.Search, page = Model.Page - 1, pageSize = Model.PageSize })" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= Math.Ceiling((double)Model.TotalComentarios / Model.PageSize); i++)
+
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { search = Model.Search, page = i, pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
+
+                @if (Model.Page < Math.Ceiling((double)Model.TotalComentarios / Model.PageSize))
+
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { search = Model.Search, page = Model.Page + 1, pageSize = Model.PageSize })" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Estadísticas Generales -->
+<div class="estadisticas text-center mt-5">
+    <h2 class="section-title mb-4">Estadísticas Generales</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm bg-light-opacity">
+                <h3 class="text-primary">@Model.TotalUsuarios</h3>
+                <p>Usuarios Registrados</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm bg-light-opacity">
+                <h3 class="text-primary">@Model.TotalDestinos</h3>
+                <p>Destinos Disponibles</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm bg-light-opacity">
+                <h3 class="text-primary">@Model.TotalItinerarios</h3>
+                <p>Itinerarios Planificados</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Acceso Rápido -->
+<div class="funciones-rapidas text-center mt-5">
+    <h2 class="section-title mb-4">Acceso Rápido</h2>
+    <p>
+        <a class="btn btn-custom m-2" asp-controller="Usuarios" asp-action="Create">Crear Nuevo Usuario</a>
+        <a class="btn btn-custom m-2" asp-controller="Itinerarios" asp-action="Create">Crear Nuevo Itinerario</a>
+        <a class="btn btn-secondary m-2" asp-controller="Usuarios" asp-action="Index">Ver Usuarios</a>
+        <a class="btn btn-secondary m-2" asp-controller="Itinerarios" asp-action="Index">Ver Itinerarios</a>
+    </p>
+</div>

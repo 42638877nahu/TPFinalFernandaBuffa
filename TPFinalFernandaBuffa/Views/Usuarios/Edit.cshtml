@@ -1,0 +1,57 @@
+﻿@model TPFinalFernandaBuffa.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Editar Usuario</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h4 class="text-primary">Formulario de Edición</h4>
+            <hr />
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CorreoElectronico" class="control-label"></label>
+                    <input asp-for="CorreoElectronico" class="form-control" />
+                    <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Contraseña" class="control-label"></label>
+                    <input asp-for="Contraseña" type="password" class="form-control" />
+                    <span asp-validation-for="Contraseña" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Fotografia" class="control-label">Fotografía actual</label><br />
+                    <img src="@Model.Fotografia" alt="Foto de @Model.Nombre" class="img-thumbnail mb-3" width="150" height="150" /><br />
+                    <label for="nuevaFotografia" class="control-label">Subir nueva fotografía</label>
+                    <input type="file" name="nuevaFotografia" class="form-control" />
+                    <span asp-validation-for="Fotografia" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary ml-2">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

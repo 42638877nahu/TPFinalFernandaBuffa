@@ -1,0 +1,58 @@
+﻿@model TPFinalFernandaBuffa.Models.Destino
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="my-4 text-center">Create</h1> <!-- Título centrado con margen superior -->
+
+<h4 class="my-3">Destino</h4> <!-- Subtítulo con margen -->
+<hr />
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <!-- Centrado y ajuste de tamaño -->
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div> <!-- Mensajes de validación -->
+
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Ubicacion" class="control-label"></label>
+                <input asp-for="Ubicacion" class="form-control" />
+                <span asp-validation-for="Ubicacion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Fotografia" class="control-label">Fotografía</label>
+                <input type="file" name="Fotografia" class="form-control-file" /> <!-- Ajustado para carga de archivo -->
+                <span asp-validation-for="Fotografia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <!-- Centramos el botón -->
+                <input type="submit" value="Create" class="btn btn-primary mx-2" /> <!-- Botón de crear -->
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center mt-3">
+    <!-- Centramos el enlace de regresar -->
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a> <!-- Botón de regresar -->
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

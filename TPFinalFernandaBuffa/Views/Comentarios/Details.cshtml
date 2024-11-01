@@ -1,0 +1,47 @@
+﻿@model TPFinalFernandaBuffa.Models.Comentario
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="my-4 text-center">Details</h1> <!-- Título centrado -->
+
+<div class="container">
+    <h4 class="my-3">Comentario</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Texto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Texto)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Usuario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Usuario.Id)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Destino)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Destino.Id)
+        </dd>
+    </dl>
+</div>
+
+<div class="text-center mt-4">
+    <!-- Centramos y añadimos un margen superior -->
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary mx-2">Edit</a> <!-- Botón de editar -->
+    <a asp-action="Index" class="btn btn-secondary mx-2">Back to List</a> <!-- Botón de regresar -->
+</div>
